@@ -23,14 +23,12 @@ public class ConfigurationSettings {
     private static final String PREFS_MIRROR = "MirrorPrefs";
     private static final String TEXT_COLOR = "text_color";
     private static final String USE_MOOD_DETECTION = "mood_detection";
-    private static final String SHOW_XKCD = "xkcd";
-    private static final String INVERT_XKCD = "invert_xkcd";
+
 
     @NonNull
     private SharedPreferences mSharedPrefs;
     private boolean mShowMoodDetection;
-    private boolean mShowXKCD;
-    private boolean mInvertXKCD;
+
     private int mTextColor;
 
     public ConfigurationSettings(Context context) {
@@ -42,8 +40,7 @@ public class ConfigurationSettings {
 
         mTextColor = mSharedPrefs.getInt(TEXT_COLOR, Color.WHITE);
         mShowMoodDetection = mSharedPrefs.getBoolean(USE_MOOD_DETECTION, false);
-        mShowXKCD = mSharedPrefs.getBoolean(SHOW_XKCD, false);
-        mInvertXKCD = mSharedPrefs.getBoolean(INVERT_XKCD, false);
+
 
     }
 
@@ -78,15 +75,6 @@ public class ConfigurationSettings {
 
 
 
-    public void setXKCDPreference(boolean showXKCD, boolean invertXKCDColors) {
-        mShowXKCD = showXKCD;
-        mInvertXKCD = invertXKCDColors;
-        SharedPreferences.Editor editor = mSharedPrefs.edit();
-        editor.putBoolean(SHOW_XKCD, showXKCD);
-        editor.putBoolean(INVERT_XKCD, invertXKCDColors);
-        editor.apply();
-    }
-
 
     public int getTextColor() {
         return mTextColor;
@@ -96,19 +84,6 @@ public class ConfigurationSettings {
     public boolean showMoodDetection() {
         return mShowMoodDetection;
     }
-
-
-
-    public boolean showXKCD() {
-        return mShowXKCD;
-    }
-
-    public boolean invertXKCD() {
-        return mInvertXKCD;
-    }
-
-
-
 
 
     public static boolean isDebugBuild() {
