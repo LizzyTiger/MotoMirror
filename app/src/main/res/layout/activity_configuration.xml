@@ -1,0 +1,168 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/activity_horizontal_margin"
+        tools:context=".ConfigurationActivity">
+
+        <TextView
+            style="@style/MirrorText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/set_up" />
+
+        <TextView
+            style="@style/ConfigurationItemText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Text Color" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/item_margin"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        style="@style/ConfigurationItemText"
+                        android:layout_margin="0dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="R" />
+
+                    <SeekBar
+                        android:id="@+id/ColorPickerRed"
+                        style="@style/ConfigurationItemText"
+                        android:layout_margin="0dp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:max="255"/>
+
+                    <TextView
+                        android:id="@+id/ColorShowerRed"
+                        style="@style/ConfigurationItemText"
+                        android:layout_margin="0dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minEms="3"
+                        android:text="0" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        style="@style/ConfigurationItemText"
+                        android:layout_margin="0dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="G" />
+
+                    <SeekBar
+                        android:id="@+id/ColorPickerGreen"
+                        style="@style/ConfigurationItemText"
+                        android:layout_margin="0dp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:max="255"/>
+
+                    <TextView
+                        android:id="@+id/ColorShowerGreen"
+                        style="@style/ConfigurationItemText"
+                        android:layout_margin="0dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minEms="3"
+                        android:text="0" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        style="@style/ConfigurationItemText"
+                        android:layout_margin="0dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="B" />
+
+                    <SeekBar
+                        android:id="@+id/ColorPickerBlue"
+                        style="@style/ConfigurationItemText"
+                        android:layout_margin="0dp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:max="255"/>
+
+                    <TextView
+                        android:id="@+id/ColorShowerBlue"
+                        style="@style/ConfigurationItemText"
+                        android:layout_margin="0dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minEms="3"
+                        android:text="0" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:id="@+id/colored_bar"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                 />
+        </LinearLayout>
+
+
+
+        <CheckBox
+            android:id="@+id/mood_detection_checkbox"
+            style="@style/ConfigurationItemText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="@string/mood_detection_option" />
+
+        <TextView
+            style="@style/ConfigurationDescriptionText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/mood_explanation" />
+
+        <Button
+            android:id="@+id/launch_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/item_margin"
+            android:text="@string/launch"
+            android:textSize="@dimen/configuration_text_size" />
+
+        <TextView
+            style="@style/ConfigurationDescriptionText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/item_margin"
+            android:text="@string/how_to_stop" />
+    </LinearLayout>
+</ScrollView>
