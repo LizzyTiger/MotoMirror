@@ -122,8 +122,6 @@ public class SetUpActivity extends Activity {
         mMoodDetectionCheckbox = (CheckBox) findViewById(R.id.mood_detection_checkbox);
         mMoodDetectionCheckbox.setChecked(mConfigSettings.showMoodDetection());
 
-
-
         findViewById(R.id.launch_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

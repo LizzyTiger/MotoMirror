@@ -4,11 +4,14 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.util.Log;
 import android.util.SparseArray;
-
+import android.util.DisplayMetrics;
+import android.view.WindowManager;
+import android.view.Display;
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.face.Face;
 import com.google.android.gms.vision.face.FaceDetector;
+import com.morristaedt.mirror.MirrorActivity;
 import com.morristaedt.mirror.R;
 
 import java.io.IOException;
@@ -87,17 +90,35 @@ public class MoodModule {
             Log.w(TAG, "Face detector dependencies are not yet available.");
         }
 
-        try {
-            mCameraSource = new CameraSource.Builder(context, detector)
-                    .setRequestedPreviewSize(640, 480)
-                    .setFacing(CameraSource.CAMERA_FACING_FRONT)
+           try {
+               DisplayMetrics displayMetrics = new DisplayMetrics();
+               ((MirrorActivity)context).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+               int width = displayMetrics.widthPixels;
+               int height = displayMetrics.heightPixels;
+               Log.d(TAG,"Metrics Preview width and height="+width+" "+height);
+           mCameraSource = new CameraSource.Builder(context, detector)
+                   .setRequestedPreviewSize(width, height)
+                   .setFacing(CameraSource.CAMERA_FACING_FRONT)
                     .setRequestedFps(30.0f)
-                    .build();
+                   .build();
 
-            mCameraSource.start();
+           mCameraSource.start();
         } catch (IOException | RuntimeException e) {
-            Log.e(TAG, "Something went horribly wrong, with your face.", e);
+           Log.e(TAG, "Something went horribly wrong, with your face.", e);
         }
+
+
+        /* try {
+           mCameraSource = new CameraSource.Builder(context, detector)
+                    .setRequestedPreviewSize(640, 480)
+                   .setFacing(CameraSource.CAMERA_FACING_FRONT)
+                    .setRequestedFps(30.0f)
+                   .build();
+
+           mCameraSource.start();
+        } catch (IOException | RuntimeException e) {
+           Log.e(TAG, "Something went horribly wrong, with your face.", e);
+        }*/
     }
 
     private String getFeedbackForSmileProbability(float isSmilingProbability) {

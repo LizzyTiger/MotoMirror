@@ -89,16 +89,9 @@ public class MirrorActivity extends ActionBarActivity {
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-
         mDayText = (TextView) findViewById(R.id.day_text);
 
-
-
-
-
         mMoodText = (TextView) findViewById(R.id.mood_text);
-
-
 
         setViewState();
     }
