@@ -23,25 +23,20 @@ public class ConfigurationSettings {
     private static final String PREFS_MIRROR = "MirrorPrefs";
     private static final String TEXT_COLOR = "text_color";
     private static final String USE_MOOD_DETECTION = "mood_detection";
+    private static final int sCounter = 0;
 
 
     @NonNull
     private SharedPreferences mSharedPrefs;
     private boolean mShowMoodDetection;
-
     private int mTextColor;
-
     public ConfigurationSettings(Context context) {
         mSharedPrefs = context.getSharedPreferences(PREFS_MIRROR, Context.MODE_PRIVATE);
         readPrefs();
     }
-
     private void readPrefs() {
-
         mTextColor = mSharedPrefs.getInt(TEXT_COLOR, Color.WHITE);
         mShowMoodDetection = mSharedPrefs.getBoolean(USE_MOOD_DETECTION, false);
-
-
     }
 
     public void setTextColorRed(int red){
@@ -63,18 +58,12 @@ public class ConfigurationSettings {
         editor.apply();
     }
 
-
-
     public void setShowMoodDetection(boolean show) {
         mShowMoodDetection = show;
         SharedPreferences.Editor editor = mSharedPrefs.edit();
         editor.putBoolean(USE_MOOD_DETECTION, show);
         editor.apply();
     }
-
-
-
-
 
     public int getTextColor() {
         return mTextColor;

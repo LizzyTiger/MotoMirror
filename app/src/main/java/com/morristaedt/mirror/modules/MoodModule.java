@@ -2,11 +2,10 @@ package com.morristaedt.mirror.modules;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.os.Bundle;
 import android.util.Log;
 import android.util.SparseArray;
 import android.util.DisplayMetrics;
-import android.view.WindowManager;
-import android.view.Display;
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.face.Face;
@@ -18,7 +17,7 @@ import java.io.IOException;
 import java.lang.ref.WeakReference;
 
 /**
- * Created by akodiakson on 9/13/15.
+ * Created by akodiakson on 9/13/15. edited/updated by Sally/Mary Apr/May2018
  */
 public class MoodModule {
     private static final String TAG = "MoodModule";
@@ -27,8 +26,14 @@ public class MoodModule {
 
     private MoodListener mCallBacks;
 
+    public static double smileCount = 0; // Smile counter
+
     public interface MoodListener {
         void onShouldGivePositiveAffirmation(String affirmation);
+    }
+
+    public MoodModule() {
+
     }
 
     public MoodModule(WeakReference<Context> contextWeakReference) {
@@ -90,35 +95,23 @@ public class MoodModule {
             Log.w(TAG, "Face detector dependencies are not yet available.");
         }
 
-           try {
-               DisplayMetrics displayMetrics = new DisplayMetrics();
-               ((MirrorActivity)context).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-               int width = displayMetrics.widthPixels;
-               int height = displayMetrics.heightPixels;
-               Log.d(TAG,"Metrics Preview width and height="+width+" "+height);
-           mCameraSource = new CameraSource.Builder(context, detector)
-                   .setRequestedPreviewSize(width, height)
-                   .setFacing(CameraSource.CAMERA_FACING_FRONT)
+        try {
+            DisplayMetrics displayMetrics = new DisplayMetrics();
+            ((MirrorActivity)context).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+            int width = displayMetrics.widthPixels;
+            int height = displayMetrics.heightPixels;
+            Log.d(TAG,"Metrics Preview width and height="+width+" "+height);
+            mCameraSource = new CameraSource.Builder(context, detector)
+                    .setRequestedPreviewSize(width, height)
+                    .setFacing(CameraSource.CAMERA_FACING_FRONT)
                     .setRequestedFps(30.0f)
-                   .build();
+                    .build();
 
-           mCameraSource.start();
+            mCameraSource.start();
         } catch (IOException | RuntimeException e) {
-           Log.e(TAG, "Something went horribly wrong, with your face.", e);
+            Log.e(TAG, "Something went horribly wrong, with your face.", e);
         }
 
-
-        /* try {
-           mCameraSource = new CameraSource.Builder(context, detector)
-                    .setRequestedPreviewSize(640, 480)
-                   .setFacing(CameraSource.CAMERA_FACING_FRONT)
-                    .setRequestedFps(30.0f)
-                   .build();
-
-           mCameraSource.start();
-        } catch (IOException | RuntimeException e) {
-           Log.e(TAG, "Something went horribly wrong, with your face.", e);
-        }*/
     }
 
     private String getFeedbackForSmileProbability(float isSmilingProbability) {
@@ -128,7 +121,12 @@ public class MoodModule {
         String feedback;
 
         if (isSmiling || aFaceIsntDetected) {
-            return null;
+            if (isSmiling){
+                this.smileCount += .05;
+                return "Wow Nice Smile";
+            }
+            feedback = "Calculating mood";
+            return feedback;
         }
 
         final Resources resources = mContextWeakReference.get().getResources();
@@ -136,10 +134,17 @@ public class MoodModule {
             feedback = resources.getString(R.string.it_gets_better);
         } else if (isSmilingProbability < 0.30) {
             feedback = resources.getString(R.string.looking_good);
+            this.smileCount += .01;
         } else {
             feedback = resources.getString(R.string.something_special);
+            this.smileCount += .01;
         }
 
         return feedback;
+    }
+
+    public  int getSmile() {
+        int newSMileCount = (int)Math.round(this.smileCount);
+        return newSMileCount;
     }
 }

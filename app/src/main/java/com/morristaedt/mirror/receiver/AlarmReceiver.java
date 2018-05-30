@@ -11,14 +11,14 @@ import android.os.SystemClock;
 import com.morristaedt.mirror.MirrorActivity;
 
 /**
- * Created by HannahMitt on 8/22/15.
+ * Created by HannahMitt on 8/22/15. edited by Sally and Mary to be more responsive
  */
 public class AlarmReceiver extends BroadcastReceiver {
 
     private static final int REQUEST_CODE = 1001;
 
     private static final String WAKE_LOCK = "HomeMirrorWakeLock";
-    private static final long MINUTES_10 = 10 * 60 * 1000;
+    private static final long MINUTES_1 = 1 * 60 * 1000;
 
     public static void startMirrorUpdates(Context context) {
         AlarmManager alarmMgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
@@ -26,7 +26,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         Intent intent = new Intent(context, AlarmReceiver.class);
         PendingIntent alarmIntent = PendingIntent.getBroadcast(context, REQUEST_CODE, intent, 0);
 
-        alarmMgr.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + MINUTES_10, MINUTES_10, alarmIntent);
+        alarmMgr.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + MINUTES_1, MINUTES_1, alarmIntent);
     }
 
     public static void stopMirrorUpdates(Context context) {

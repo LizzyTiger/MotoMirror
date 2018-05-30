@@ -26,17 +26,11 @@ import com.morristaedt.mirror.configuration.ConfigurationSettings;
 
 public class SetUpActivity extends Activity {
 
-    private static final long HOUR_MILLIS = 60 * 60 * 1000;
-    private static final int METERS_MIN = 500;
 
     @NonNull
     private ConfigurationSettings mConfigSettings;
-
-
     private CheckBox mMoodDetectionCheckbox;
-
     private View mColorShowView;
-
     private SeekBar mColorPickerRed;
     private SeekBar mColorPickerGreen;
     private SeekBar mColorPickerBlue;
